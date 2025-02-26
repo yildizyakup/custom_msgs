@@ -1,38 +1,28 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 project(custom_msgs)
 
-## Compile as C++11, supported in ROS Kinetic and newer
-set(CMAKE_CXX_STANDARD 11)
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 11)
+endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-## Find catkin macros and libraries
-find_package(catkin REQUIRED COMPONENTS
-  message_generation
-  message_runtime
-  roscpp
-  rospy
-  std_msgs
-  geometry_msgs
+find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+
+# List your message files here
+set(msg_files
+  "msg/MyDetection3DArray.msg"
+  "msg/MyDetection3D.msg"
+  "msg/MyBoundingBox3D.msg"
+  "msg/DetectionResult.msg"
 )
 
-## Declare ROS messages to be built
-add_message_files(
-  FILES
-    MyDetection3DArray.msg
-    MyDetection3D.msg
-    MyBoundingBox3D.msg
-    DetectionResult.msg
+rosidl_generate_interfaces(${PROJECT_NAME}
+  ${msg_files}
+  DEPENDENCIES std_msgs geometry_msgs
 )
 
-## Generate added messages with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-    std_msgs
-    geometry_msgs
-)
-
-catkin_package(
-  CATKIN_DEPENDS
-    message_runtime
-)
+ament_package()
 

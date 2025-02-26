@@ -17,6 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Declare ROS messages to be built
 add_message_files(
+  DIRECTORY msg
   FILES
     MyDetection3DArray.msg
     MyDetection3D.msg
@@ -32,7 +33,6 @@ generate_messages(
 )
 
 catkin_package(
-  CATKIN_DEPENDS
-    message_runtime
+  CATKIN_DEPENDS message_runtime
 )
 
