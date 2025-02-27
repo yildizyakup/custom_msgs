@@ -32,7 +32,13 @@ generate_messages(
     geometry_msgs
 )
 
+## Define catkin package
 catkin_package(
-  CATKIN_DEPENDS message_runtime
+  CATKIN_DEPENDS message_runtime std_msgs geometry_msgs
+)
+
+## Include directories
+include_directories(
+  ${catkin_INCLUDE_DIRS}
 )
 
